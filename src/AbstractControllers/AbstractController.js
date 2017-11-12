@@ -9,6 +9,7 @@ class AbstractController {
     }
     this.methods = methods;
     this.excluded = [];
+    this.dinamic = {};
   }
 }
 

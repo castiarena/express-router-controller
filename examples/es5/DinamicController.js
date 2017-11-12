@@ -1,6 +1,6 @@
-const { AbstractDinamicController } = require('express-controllers');
+const { AbstractController } = require('express-controllers');
 
-class DinamicController extends AbstractDinamicController {
+class DinamicController extends AbstractController {
   constructor(){
     super();
     this.dinamic = {

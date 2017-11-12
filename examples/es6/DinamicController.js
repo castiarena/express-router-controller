@@ -1,6 +1,6 @@
-import { AbstractDinamicController } from 'express-controllers';
+import { AbstractController } from 'express-controllers';
 
-class DinamicController extends AbstractDinamicController {
+class DinamicController extends AbstractController {
   constructor(){
     super();
     this.dinamic = {
