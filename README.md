@@ -56,10 +56,10 @@ export default {
 Register controllers to the router:
 ```js
 import express from 'express';
-import expressControllers from 'express-controllers';
+import expressRouterControllers from 'express-router-controller';
 
 const router = express.Router();
-expressControllers.register(router);
+expressRouterControllers.register(router);
 
 // tun app
 app.use(router);
