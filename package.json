@@ -12,7 +12,9 @@
     "watch": "npm start -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "express", "router", "mvc"
+  ],
   "author": "Agustin Castiarena <castiarena@gmail.com>",
   "license": "ISC",
   "devDependencies": {
