@@ -8,6 +8,7 @@ class AbstractController {
       throw new Error(`${AbstractController.name} is a abstract class, please do not instance him`);
     }
     this.methods = methods;
+    this.excluded = [];
   }
 }
 

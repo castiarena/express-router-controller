@@ -22,15 +22,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AbstractDinamicController = function (_AbstractController) {
   _inherits(AbstractDinamicController, _AbstractController);
 
-  function AbstractDinamicController(dinamicMappingMethods) {
+  function AbstractDinamicController(methods) {
     _classCallCheck(this, AbstractDinamicController);
 
-    var _this = _possibleConstructorReturn(this, (AbstractDinamicController.__proto__ || Object.getPrototypeOf(AbstractDinamicController)).call(this, []));
+    var _this = _possibleConstructorReturn(this, (AbstractDinamicController.__proto__ || Object.getPrototypeOf(AbstractDinamicController)).call(this, methods));
 
     if (_this.constructor.name === AbstractDinamicController.name) {
       throw new Error(AbstractDinamicController.name + ' is a abstract class, please do not instance him');
     }
-    _this.dinamic = dinamicMappingMethods;
+    _this.dinamic = {};
     return _this;
   }
 
