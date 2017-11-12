@@ -1,11 +1,11 @@
 {
   "name": "express-router-controller",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Controller for express router",
   "main": "index.js",
-  "repository" : {
-    "type" : "git",
-     "url" : "https://github.com/castiarena/express-router-controller.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/castiarena/express-router-controller.git"
   },
   "scripts": {
     "start": "babel src --out-dir dist --presets=env",
@@ -13,7 +13,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "express", "router", "mvc"
+    "express",
+    "router",
+    "mvc"
   ],
   "author": "Agustin Castiarena <castiarena@gmail.com>",
   "license": "ISC",
