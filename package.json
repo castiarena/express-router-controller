@@ -1,6 +1,6 @@
 {
   "name": "express-router-controller",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Controller for express router",
   "main": "index.js",
   "repository": {
