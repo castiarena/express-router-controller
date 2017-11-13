@@ -44,7 +44,6 @@ const register = router => {
       Object.keys(controller.dinamic).forEach((dinamic) => {
         Object.keys(controller.dinamic[dinamic]).forEach((method) => {
           controller.excluded.push(controller.dinamic[dinamic][method]);
-          console.log(`${path}${dinamic}`)
           router[method](`${path}${dinamic}`, (req, res) => controller.dinamic[dinamic][method](req, res));
         });
       });
