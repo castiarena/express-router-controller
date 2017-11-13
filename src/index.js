@@ -32,15 +32,19 @@ const register = router => {
   }
 
   controllers.forEach((Controller) => {
+
     const controller = new Controller();
     const controllerName = controller.constructor.name.replace(defaultCommonName, '');
 
+    const length = controllerName.length;
+
     // only if configure "dinamic" object on controller class
     if (controller.dinamic) {
-      const path = `${controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+      const path = `/${controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase().slice(1, length + 1)}`;
       Object.keys(controller.dinamic).forEach((dinamic) => {
-        controller.excluded.push(dinamic);
         Object.keys(controller.dinamic[dinamic]).forEach((method) => {
+          controller.excluded.push(controller.dinamic[dinamic][method]);
+          console.log(`${path}${dinamic}`)
           router[method](`${path}${dinamic}`, (req, res) => controller.dinamic[dinamic][method](req, res));
         });
       });
@@ -49,13 +53,18 @@ const register = router => {
 
     // sub routes are all methods less "constructor"
     const subRoutes = Object.getOwnPropertyNames(Controller.prototype)
-      .filter(name =>
-        name !== 'constructor' && name !== controller.excluded.find(exclude => exclude === name));
+      .filter(name => name !== 'constructor')
+      .filter(name =>{
+        return Controller.prototype[name] !== controller.excluded.find(exclude =>{
+          return Controller.prototype[name].name === exclude.name.replace('bound ','');
+        });
+      });
+
 
     // iterate for each sub route and expose every endpoint linked to a method
     subRoutes.forEach((subRoute) => {
       controller.methods.forEach((method) => {
-        let path = `/${controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+        let path = `/${controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase().slice(1, length + 1)}`;
         if (subRoute !== defaultRoute) {
           path = `${path}/${subRoute.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
         }
