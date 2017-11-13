@@ -16,6 +16,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var configFileName = '/express-controllers.config.js';
 
+// polyfill find
+if (!Array.prototype.find) {
+  require('array.prototype.find').shim();
+}
+
 /**
  * Register controllers
  * @param router
@@ -30,13 +35,21 @@ var register = function register(router) {
       defaultCommonName = _ref.defaultCommonName,
       defaultRoute = _ref.defaultRoute;
 
+  defaultHome = defaultHome || 'Home';
+  defaultCommonName = defaultCommonName || 'Controller';
+  defaultRoute = defaultRoute || 'index';
+
+  if (!controllers || controllers.length === 0) {
+    throw new Error('Please set the controller to the register at file: ' + configFileName);
+  }
+
   controllers.forEach(function (Controller) {
     var controller = new Controller();
     var controllerName = controller.constructor.name.replace(defaultCommonName, '');
 
     // only if configure "dinamic" object on controller class
     if (controller.dinamic) {
-      var _path = '' + (controllerName === defaultHome ? '' : controllerName.toLowerCase());
+      var _path = '' + (controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase());
       Object.keys(controller.dinamic).forEach(function (dinamic) {
         controller.excluded.push(dinamic);
         Object.keys(controller.dinamic[dinamic]).forEach(function (method) {
@@ -57,7 +70,7 @@ var register = function register(router) {
     // iterate for each sub route and expose every endpoint linked to a method
     subRoutes.forEach(function (subRoute) {
       controller.methods.forEach(function (method) {
-        var path = '/' + (controllerName === defaultHome ? '' : controllerName.toLowerCase());
+        var path = '/' + (controllerName === defaultHome ? '' : controllerName.replace(/([A-Z])/g, '-$1').toLowerCase());
         if (subRoute !== defaultRoute) {
           path = path + '/' + subRoute.replace(/([A-Z])/g, '-$1').toLowerCase();
         }

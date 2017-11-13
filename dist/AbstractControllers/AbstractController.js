@@ -25,6 +25,7 @@ var AbstractController = function AbstractController() {
   }
   this.methods = methods;
   this.excluded = [];
+  this.dinamic = {};
 };
 
 exports.default = AbstractController;
